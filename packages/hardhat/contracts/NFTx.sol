@@ -2,13 +2,13 @@ pragma solidity >=0.8.0 <0.9.0;
 //SPDX-License-Identifier: MIT
 
 import "hardhat/console.sol";
-// import "@openzeppelin/contracts/access/Ownable.sol"; 
-// https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol
 import "./Base64.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
-contract NFTx is ERC721URIStorage {
+contract NFTx is ERC721URIStorage, Ownable {
 
   using Counters for Counters.Counter;
   Counters.Counter private currentId;
@@ -24,13 +24,13 @@ contract NFTx is ERC721URIStorage {
     currentId.increment();
   }
 
-  function openSale() public {
+  function openSale() public onlyOwner {
 
     saleIsActive = true;
 
   }
 
-  function closeSale() public {
+  function closeSale() public onlyOwner {
 
     saleIsActive = false;
 
@@ -46,7 +46,7 @@ contract NFTx is ERC721URIStorage {
             bytes(
                 string(
                     abi.encodePacked(
-                        '{ "name": "NFTix #',
+                        '{ "name": "NFTx #',
                         Strings.toString(currentId.current()),
                         '", "description": "A NFT-powered ticketing system", ',
                         '"traits": [{ "trait_type": "Checked In", "value": "false" }, { "trait_type": "Purchased", "value": "true" }], ',

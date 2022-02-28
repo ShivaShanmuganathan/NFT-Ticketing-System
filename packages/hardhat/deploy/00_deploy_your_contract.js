@@ -27,6 +27,8 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
 
   // Getting a previously deployed contract
   const NFTx = await ethers.getContract("NFTx", deployer);
+  await NFTx.transferOwnership('0xBcd4042DE499D14e55001CcbB24a551F3b954096');
+
   /*  await YourContract.setPurpose("Hello");
   
     To take ownership of yourContract using the ownable library uncomment next line and add the 
