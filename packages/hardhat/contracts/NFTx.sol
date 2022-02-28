@@ -1,5 +1,5 @@
-pragma solidity >=0.8.0 <0.9.0;
 //SPDX-License-Identifier: MIT
+pragma solidity >=0.8.0 <0.9.0;
 
 import "hardhat/console.sol";
 import "./Base64.sol";
@@ -22,18 +22,6 @@ contract NFTx is ERC721URIStorage, Ownable {
 
   constructor() ERC721("NFTx", "NFTx") {
     currentId.increment();
-  }
-
-  function openSale() public onlyOwner {
-
-    saleIsActive = true;
-
-  }
-
-  function closeSale() public onlyOwner {
-
-    saleIsActive = false;
-
   }
 
   function mint() public payable{
@@ -71,6 +59,16 @@ contract NFTx is ERC721URIStorage, Ownable {
     availableTickets -= 1;
 
   }
+
+  
+  function openSale() public onlyOwner {
+    saleIsActive = true;
+  }
+
+  function closeSale() public onlyOwner {
+    saleIsActive = false;
+  }
+
 
   function displayAvailableTickets() public view returns(uint256){
     return availableTickets;

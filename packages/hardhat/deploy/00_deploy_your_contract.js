@@ -27,7 +27,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
 
   // Getting a previously deployed contract
   const NFTx = await ethers.getContract("NFTx", deployer);
-  await NFTx.transferOwnership('0xBcd4042DE499D14e55001CcbB24a551F3b954096');
+  await NFTx.transferOwnership('0x645bE56bf2B43295dF59307F2e2259c52C88ECE8');
 
   /*  await YourContract.setPurpose("Hello");
   
@@ -35,7 +35,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     address you want to be the owner. 
     // await yourContract.transferOwnership(YOUR_ADDRESS_HERE);
 
-    //const yourContract = await ethers.getContractAt('YourContract', "0xaAC799eC2d00C013f1F11c37E654e59B0429DF6A") //<-- if you want to instantiate a version of a contract at a specific address!
+    // const yourContract = await ethers.getContractAt('YourContract', "0xaAC799eC2d00C013f1F11c37E654e59B0429DF6A") //<-- if you want to instantiate a version of a contract at a specific address!
   */
 
   /*
