@@ -83,10 +83,8 @@ contract NFTx is ERC721URIStorage, Ownable {
             abi.encodePacked("data:application/json;base64,", json)
         );
         _setTokenURI(tokenId, tokenURI);
-    }
-
-
-  
+  }
+    
   function openSale() public onlyOwner {
     saleIsActive = true;
   }
@@ -104,7 +102,9 @@ contract NFTx is ERC721URIStorage, Ownable {
     return totalTickets;
   }
 
-  
+  function confirmOwnership(address addy) public view returns (bool) {
+        return holderTokenIDs[addy].length > 0;
+  }
 
 
 }
