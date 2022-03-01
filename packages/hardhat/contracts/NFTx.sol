@@ -19,6 +19,7 @@ contract NFTx is ERC721URIStorage, Ownable {
   uint256 public mintPrice = 0.1 ether;
 
   mapping (address => uint[]) public holderTokenIDs;
+  mapping(address => bool) public checkIns;
 
   constructor() ERC721("NFTx", "NFTx") {
     currentId.increment();
@@ -60,6 +61,31 @@ contract NFTx is ERC721URIStorage, Ownable {
 
   }
 
+  function checkIn(address user) public {
+        checkIns[user] = true;
+        uint256 tokenId = holderTokenIDs[user][0];
+
+        string memory json = Base64.encode(
+            bytes(
+                string(
+                    abi.encodePacked(
+                        '{ "name": "NFTix #',
+                        Strings.toString(tokenId),
+                        '", "description": "A NFT-powered ticketing system", ',
+                        '"traits": [{ "trait_type": "Checked In", "value": "true" }, { "trait_type": "Purchased", "value": "true" }], ',
+                        '"image": "ipfs://QmTHNkB3VwuAd7cLF1vVzumX18osfwLLHiLg6QS36kgXPc" }'
+                    )
+                )
+            )
+        );
+
+        string memory tokenURI = string(
+            abi.encodePacked("data:application/json;base64,", json)
+        );
+        _setTokenURI(tokenId, tokenURI);
+    }
+
+
   
   function openSale() public onlyOwner {
     saleIsActive = true;
@@ -77,6 +103,8 @@ contract NFTx is ERC721URIStorage, Ownable {
   function displayTotalTickets() public view returns(uint256){
     return totalTickets;
   }
+
+  
 
 
 }
